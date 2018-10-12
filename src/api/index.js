@@ -4,7 +4,7 @@ const auth = require('./auth');
 const config = require('../config');
 const debug = require('./debug');
 const enquire = require('./enquire');
-const entity = require('./entity');
+const movie = require('./movie');
 const { errorHandler } = require('../utils');
 
 const router = new Router();
@@ -34,7 +34,7 @@ const router = new Router();
  */
 router.use('/users', user);
 router.use('/auth', auth);
-router.use('/entity', entity);
+router.use('/movies', movie);
 router.use('/enquire', enquire);
 router.use('/debug', debug);
 router.get('/', (req, res) =>

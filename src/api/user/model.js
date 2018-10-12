@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 const mongooseKeywords = require('mongoose-keywords');
 const { env } = require('../../config');
 const slug = require('slug');
-
-const { ObjectId } = mongoose.Schema;
-
-// Shorthand
 const { Schema } = mongoose;
 
 const roles = ['user', 'admin'];
@@ -96,15 +92,9 @@ userSchema.pre('save', function addSlug(next) {
 userSchema.methods = {
 	view(full) {
 		const view = {};
-		let fields = ['id', 'name', 'picture', 'cover', 'organisation', 'role', 'approvedPilot'];
-
-		if (full) {
-			fields = [...fields, 'email', 'username', 'location',
-				'userProfile', 'pilotProfile', 'createdAt'];
-		}
-
+		let fields = ['id', 'name', 'picture', 'role', ];
+		if (full) fields = [...fields, 'email', 'username', 'createdAt'];
 		fields.forEach((field) => { view[field] = this[field]; });
-
 		return view;
 	},
 
