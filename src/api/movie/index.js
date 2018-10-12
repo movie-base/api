@@ -17,30 +17,30 @@ const router = new Router();
 	*/
 
 /**
- * @api {post} /entity Create Entity
+ * @api {post} /movie Create Movie
  * @apiName CreateEntity
- * @apiGroup Entity
+ * @apiGroup Movie
  * @apiPerEntity user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Movie not found.
  * @apiError 401 user access only.
  */
 router.post(
 	'/',
-	token({ required: true }),
+	token({ required: true, roles: ['admin'] }),
 	create,
 );
 
 /**
- * @api {get} /entity Retrieve entity
+ * @api {get} /movie Retrieve movie
  * @apiName RetrieveEntity
- * @apiGroup Entity
+ * @apiGroup Movie
  * @apiPerEntity admin
  * @apiParam {String} access_token admin access token.
  * @apiUse listParams
- * @apiSuccess {Object[]} entity List of entity.
+ * @apiSuccess {Object[]} movie List of movie.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 admin access only.
  */
@@ -52,14 +52,14 @@ router.get(
 );
 
 /**
- * @api {get} /entity/:id Retrieve Entity
+ * @api {get} /movie/:id Retrieve Movie
  * @apiName RetrieveEntity
- * @apiGroup Entity
+ * @apiGroup Movie
  * @apiPerEntity user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Movie not found.
  * @apiError 401 user access only.
  */
 router.get(
@@ -69,30 +69,30 @@ router.get(
 );
 
 /**
- * @api {put} /entity/:id Update Entity
+ * @api {put} /movie/:id Update Movie
  * @apiName UpdateEntity
- * @apiGroup Entity
+ * @apiGroup Movie
  * @apiPerEntity user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Movie not found.
  * @apiError 401 user access only.
  */
 router.put(
 	'/:id',
-	token({ required: true }),
+	token({ required: true, roles: ['admin'] }),
 	update,
 );
 
 /**
- * @api {delete} /entity/:id Delete Entity
+ * @api {delete} /movie/:id Delete Movie
  * @apiName DeleteEntity
- * @apiGroup Entity
+ * @apiGroup Movie
  * @apiPerEntity admin
  * @apiParam {String} access_token admin access token.
  * @apiSuccess (Success 204) 204 No Content.
- * @apiError 404 Entity not found.
+ * @apiError 404 Movie not found.
  * @apiError 401 admin access only.
  */
 router.delete(

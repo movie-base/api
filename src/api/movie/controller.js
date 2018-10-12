@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { success, notFound } = require('../../services/response/');
-const Entity = require('./model');
+const Movie = require('./model');
 
 /**
 * CUSTOM FUNCTIONS
@@ -12,36 +12,36 @@ const Entity = require('./model');
 */
 
 exports.create = ({ body, user }, res, next) => {
-	return Entity.create(body)
-		.then(entity => entity.view(true))
-		.then((entity) => res.status(201).json(entity))
+	return Movie.create(body)
+		.then(movie => movie.view(true))
+		.then((movie) => res.status(201).json(movie))
 		.catch(next);
 };
 
 exports.index = ({ querymen: { query, select, cursor } }, res, next) =>
-	Entity.find({ archived: { $ne: true } }, select, cursor)
-		.then(entity => entity.map(entityObject => entityObject.view(true)))
+	Movie.find({ archived: { $ne: true } }, select, cursor)
+		.then(movie => movie.map(movieObject => movieObject.view(true)))
 		.then(success(res))
 		.catch(next);
 
 exports.show = ({ params }, res, next) =>
-	Entity.findById(params.id)
+	Movie.findById(params.id)
 		.then(notFound(res))
-		.then(entity => (entity ? entity.view() : null))
+		.then(movie => (movie ? movie.view() : null))
 		.then(success(res))
 		.catch(next);
 
 exports.update = ({ body, params }, res, next) =>
-	Entity.findById(params.id)
+	Movie.findById(params.id)
 		.then(notFound(res))
-		.then(entity => (entity ? _.extend(entity, body).save() : null))
-		.then(entity => (entity ? entity.view(true) : null))
+		.then(movie => (movie ? _.extend(movie, body).save() : null))
+		.then(movie => (movie ? movie.view(true) : null))
 		.then(success(res))
 		.catch(next);
 
 exports.destroy = ({ params }, res, next) =>
-	Entity.findById(params.id)
+	Movie.findById(params.id)
 		.then(notFound(res))
-		.then(entity => (entity ? entity.remove() : null))
+		.then(movie => (movie ? movie.remove() : null))
 		.then(success(res, 204))
 		.catch(next);

@@ -2,11 +2,29 @@ const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Schema;
 
-const entitySchema = new mongoose.Schema({
-	title: String
+const movieSchema = new mongoose.Schema({
+	title: String,
+	year: String,
+	released: String,
+	runtime: String,
+	genres: [String],
+	directors: [String],
+	writers: [String],
+	actors: [String],
+	plot: String,
+	language: String,
+	language: String,
+	country: String,
+	poster: String,
+	rottenTomatoesRating: Number,
+	metascore: Number,
+	imdbRating: Number,
+	imdbVotes: Number,
+	imdbId: String,
+	boxOffice: Number
 }, { timestamps: true });
 
-entitySchema.methods = {
+movieSchema.methods = {
 	view(full) {
 		const view = {
 			// simple view
@@ -22,6 +40,6 @@ entitySchema.methods = {
 	},
 };
 
-const Entity = mongoose.model('Entity', entitySchema);
+const Movie = mongoose.model('Movie', movieSchema);
 
-module.exports = Entity;
+module.exports = Movie;
