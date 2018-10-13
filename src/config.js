@@ -13,7 +13,7 @@ const requireProcessEnv = (name) => {
 };
 
 /* istanbul ignore next */
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
 	dotenv.load({
 		path: path.join(__dirname, '../.env'),
 		sample: path.join(__dirname, '../.env.example'),
@@ -40,7 +40,7 @@ const baseConfig = {
 	jwtSecret: requireProcessEnv('JWT_SECRET'),
 	googleClientId: requireProcessEnv('GOOGLE_CLIENT_ID'),
 	googleClientSecret: requireProcessEnv('GOOGLE_CLIENT_SECRET'),
-	slackWebhookUrl: 'https://hooks.slack.com/services/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',
+	slackWebhookUrl: 'https://hooks.slack.com/services/T248T06SX/B7KDY8VR7/rZgNAbdRBDQjhhOzEfcSAj',
 	mongo: {
 		options: {
 			db: {
@@ -60,7 +60,7 @@ const developmentConfig = {
 };
 
 const productionConfig = {
-	ip: process.env.IP || undefined,
+	ip: process.env.IP || '0.0.0.0',
 	port: 8000,
 	noReplyEmail: 'noreply@cropian.com',
 	enquiriesEmail: 'enquiries@cropian.com',
@@ -77,9 +77,6 @@ let config;
 switch (process.env.NODE_ENV) {
 case 'development':
 	config = Object.assign({}, baseConfig, developmentConfig);
-	break;
-case 'test':
-	config = Object.assign({}, baseConfig, testConfig);
 	break;
 default:
 	config = Object.assign({}, baseConfig, productionConfig);
