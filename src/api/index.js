@@ -5,6 +5,8 @@ const config = require('../config');
 const debug = require('./debug');
 const enquire = require('./enquire');
 const movie = require('./movie');
+const interaction = require('./interaction');
+const recommendation = require('./recommendation');
 const { errorHandler } = require('../utils');
 
 const router = new Router();
@@ -35,6 +37,8 @@ const router = new Router();
 router.use('/users', user);
 router.use('/auth', auth);
 router.use('/movies', movie);
+router.use('/interactions', interaction);
+router.use('/recommendations', recommendation);
 router.use('/enquire', enquire);
 router.use('/debug', debug);
 router.get('/', (req, res) =>
