@@ -17,8 +17,8 @@ exports.create = ({ body, user }, res, next) =>
 		.then(interaction => res.status(201).json(interaction))
 		.catch(next);
 
-exports.index = ({ querymen: { query, select, cursor } }, res, next) =>
-	Interaction.find({ archived: { $ne: true } }, select, cursor)
+exports.index = ({ querymen: { query, select, cursor }, user }, res, next) =>
+	Interaction.find({ archived: { $ne: true }, user: user._id }, select, cursor)
 		.then(interaction => interaction.map(interactionObject => interactionObject.view(true)))
 		.then(success(res))
 		.catch(next);

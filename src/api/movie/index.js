@@ -17,7 +17,7 @@ const router = new Router();
 	*/
 
 /**
- * @api {post} /movie Create Movie
+ * @api {post} /movies Create Movie
  * @apiName CreateMovie
  * @apiGroup Movie
  * @apiPerMovie user
@@ -34,7 +34,7 @@ router.post(
 );
 
 /**
- * @api {get} /movie Retrieve movie
+ * @api {get} /movies Retrieve movie
  * @apiName RetrieveMovie
  * @apiGroup Movie
  * @apiPerMovie admin
@@ -46,13 +46,13 @@ router.post(
  */
 router.get(
 	'/',
-	token({ required: true, roles: ['admin'] }),
+	token({ required: true }),
 	query({ limit: { max: 500 } }),
 	index,
 );
 
 /**
- * @api {get} /movie/:id Retrieve Movie
+ * @api {get} /movies/:id Retrieve Movie
  * @apiName RetrieveMovie
  * @apiGroup Movie
  * @apiPerMovie user
@@ -69,7 +69,7 @@ router.get(
 );
 
 /**
- * @api {put} /movie/:id Update Movie
+ * @api {put} /movies/:id Update Movie
  * @apiName UpdateMovie
  * @apiGroup Movie
  * @apiPerMovie user
@@ -86,7 +86,7 @@ router.put(
 );
 
 /**
- * @api {delete} /movie/:id Delete Movie
+ * @api {delete} /movies/:id Delete Movie
  * @apiName DeleteMovie
  * @apiGroup Movie
  * @apiPerMovie admin

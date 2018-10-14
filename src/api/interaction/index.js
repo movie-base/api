@@ -17,7 +17,7 @@ const router = new Router();
 	*/
 
 /**
- * @api {post} /interaction Create Interaction
+ * @api {post} /interactions Create Interaction
  * @apiName CreateInteraction
  * @apiGroup Interaction
  * @apiPerInteraction user
@@ -34,7 +34,7 @@ router.post(
 );
 
 /**
- * @api {get} /interaction Retrieve interaction
+ * @api {get} /interactions Retrieve interaction
  * @apiName RetrieveInteraction
  * @apiGroup Interaction
  * @apiPerInteraction admin
@@ -52,7 +52,7 @@ router.get(
 );
 
 /**
- * @api {get} /interaction/:id Retrieve Interaction
+ * @api {get} /interactions/:id Retrieve Interaction
  * @apiName RetrieveInteraction
  * @apiGroup Interaction
  * @apiPerInteraction user
@@ -69,7 +69,7 @@ router.get(
 );
 
 /**
- * @api {put} /interaction/:id Update Interaction
+ * @api {put} /interactions/:id Update Interaction
  * @apiName UpdateInteraction
  * @apiGroup Interaction
  * @apiPerInteraction user
@@ -86,7 +86,7 @@ router.put(
 );
 
 /**
- * @api {delete} /interaction/:id Delete Interaction
+ * @api {delete} /interactions/:id Delete Interaction
  * @apiName DeleteInteraction
  * @apiGroup Interaction
  * @apiPerInteraction admin
