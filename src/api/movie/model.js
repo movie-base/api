@@ -1,17 +1,29 @@
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
-	title: String,
-	year: String,
+	title: {
+		type: String,
+		index: true,
+	},
+	year: {
+		type: String,
+		index: true,
+	},
 	released: String,
 	runtime: String,
 	genres: [String],
 	directors: [String],
 	writers: [String],
 	actors: [String],
-	plot: String,
+	plot: {
+		type: String,
+		index: true,
+	},
 	language: [String],
-	country: String,
+	country: {
+		type: String,
+		index: true,
+	},
 	poster: String,
 	rottenTomatoesRating: Number,
 	metascore: Number,
