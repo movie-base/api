@@ -17,14 +17,14 @@ const router = new Router();
 	*/
 
 /**
- * @api {post} /entity Create Entity
- * @apiName CreateEntity
- * @apiGroup Entity
- * @apiPerEntity user
+ * @api {post} /interaction Create Interaction
+ * @apiName CreateInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Interaction Interaction's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Interaction not found.
  * @apiError 401 user access only.
  */
 router.post(
@@ -34,32 +34,32 @@ router.post(
 );
 
 /**
- * @api {get} /entity Retrieve entity
- * @apiName RetrieveEntity
- * @apiGroup Entity
- * @apiPerEntity admin
+ * @api {get} /interaction Retrieve interaction
+ * @apiName RetrieveInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction admin
  * @apiParam {String} access_token admin access token.
  * @apiUse listParams
- * @apiSuccess {Object[]} entity List of entity.
+ * @apiSuccess {Object[]} interaction List of interaction.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 admin access only.
  */
 router.get(
 	'/',
-	token({ required: true, roles: ['admin'] }),
+	token({ required: true }),
 	query({ limit: { max: 500 } }),
 	index,
 );
 
 /**
- * @api {get} /entity/:id Retrieve Entity
- * @apiName RetrieveEntity
- * @apiGroup Entity
- * @apiPerEntity user
+ * @api {get} /interaction/:id Retrieve Interaction
+ * @apiName RetrieveInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Interaction Interaction's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Interaction not found.
  * @apiError 401 user access only.
  */
 router.get(
@@ -69,14 +69,14 @@ router.get(
 );
 
 /**
- * @api {put} /entity/:id Update Entity
- * @apiName UpdateEntity
- * @apiGroup Entity
- * @apiPerEntity user
+ * @api {put} /interaction/:id Update Interaction
+ * @apiName UpdateInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} Entity Entity's data.
+ * @apiSuccess {Object} Interaction Interaction's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Entity not found.
+ * @apiError 404 Interaction not found.
  * @apiError 401 user access only.
  */
 router.put(
@@ -86,13 +86,13 @@ router.put(
 );
 
 /**
- * @api {delete} /entity/:id Delete Entity
- * @apiName DeleteEntity
- * @apiGroup Entity
- * @apiPerEntity admin
+ * @api {delete} /interaction/:id Delete Interaction
+ * @apiName DeleteInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction admin
  * @apiParam {String} access_token admin access token.
  * @apiSuccess (Success 204) 204 No Content.
- * @apiError 404 Entity not found.
+ * @apiError 404 Interaction not found.
  * @apiError 401 admin access only.
  */
 router.delete(

@@ -11,12 +11,11 @@ const Movie = require('./model');
 * GENERIC FUNCTIONS (do not modify)
 */
 
-exports.create = ({ body, user }, res, next) => {
-	return Movie.create(body)
+exports.create = ({ body, user }, res, next) =>
+	Movie.create(body)
 		.then(movie => movie.view(true))
-		.then((movie) => res.status(201).json(movie))
+		.then(movie => res.status(201).json(movie))
 		.catch(next);
-};
 
 exports.index = ({ querymen: { query, select, cursor } }, res, next) =>
 	Movie.find({ archived: { $ne: true } }, select, cursor)

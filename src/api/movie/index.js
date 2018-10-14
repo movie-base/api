@@ -18,9 +18,9 @@ const router = new Router();
 
 /**
  * @api {post} /movie Create Movie
- * @apiName CreateEntity
+ * @apiName CreateMovie
  * @apiGroup Movie
- * @apiPerEntity user
+ * @apiPerMovie user
  * @apiParam {String} access_token user access token.
  * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -35,9 +35,9 @@ router.post(
 
 /**
  * @api {get} /movie Retrieve movie
- * @apiName RetrieveEntity
+ * @apiName RetrieveMovie
  * @apiGroup Movie
- * @apiPerEntity admin
+ * @apiPerMovie admin
  * @apiParam {String} access_token admin access token.
  * @apiUse listParams
  * @apiSuccess {Object[]} movie List of movie.
@@ -53,9 +53,9 @@ router.get(
 
 /**
  * @api {get} /movie/:id Retrieve Movie
- * @apiName RetrieveEntity
+ * @apiName RetrieveMovie
  * @apiGroup Movie
- * @apiPerEntity user
+ * @apiPerMovie user
  * @apiParam {String} access_token user access token.
  * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -70,9 +70,9 @@ router.get(
 
 /**
  * @api {put} /movie/:id Update Movie
- * @apiName UpdateEntity
+ * @apiName UpdateMovie
  * @apiGroup Movie
- * @apiPerEntity user
+ * @apiPerMovie user
  * @apiParam {String} access_token user access token.
  * @apiSuccess {Object} Movie Movie's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -87,9 +87,9 @@ router.put(
 
 /**
  * @api {delete} /movie/:id Delete Movie
- * @apiName DeleteEntity
+ * @apiName DeleteMovie
  * @apiGroup Movie
- * @apiPerEntity admin
+ * @apiPerMovie admin
  * @apiParam {String} access_token admin access token.
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Movie not found.
