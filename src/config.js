@@ -61,7 +61,7 @@ const developmentConfig = {
 
 const productionConfig = {
 	ip: process.env.IP || '0.0.0.0',
-	port: 8000,
+	port: process.env.PORT || 8080,
 	noReplyEmail: 'noreply@cropian.com',
 	enquiriesEmail: 'enquiries@cropian.com',
 	adminEmail: 'admin@cropian.com',
