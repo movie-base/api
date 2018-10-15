@@ -24,11 +24,11 @@ module.exports = (routes) => {
 					res.statusCode,
 				));
 			next();
-		});
+		}, cors());
 	}
 
 	if (config.env === 'development') {
-		app.use(cors());
+		app.use(cors({ credentials: true, origin: true }));
 	}
 
 	app.use(bodyParser.urlencoded({ extended: false }));
