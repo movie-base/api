@@ -47,7 +47,7 @@ router.post(
 router.get(
 	'/',
 	token({ required: true }),
-	query({ limit: { max: 500 } }),
+	query(),
 	index,
 );
 

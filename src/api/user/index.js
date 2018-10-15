@@ -33,7 +33,7 @@ const {
 router.get(
 	'/',
 	token({ required: true, roles: ['admin'] }),
-	query(Object.assign({}, { limit: { max: 500 } })),
+	query(),
 	index,
 );
 
