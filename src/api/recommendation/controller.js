@@ -1,20 +1,41 @@
 const _ = require('lodash');
-// const { schema: { ObjectId } } = require('mongoose');
+const { ObjectId } = require('mongoose').Schema;
 const { success, notFound } = require('../../services/response/');
 const Interaction = require('../interaction/model');
 const Movie = require('../movie/model');
 
 exports.index = async ({ querymen: { query, select, cursor }, user }, res, next) => {
-	// // 1. Grab all watched and liked movies from target user's
-	// // interactions
-	// // output: array of movieIds watched by the target user
+	// 1. Grab all watched and liked movies from target user's
+	// interactions
+	// output: array of movieIds watched by the target user
 	// const userMovies = await Interaction
 	// 	.find({
 	// 		user: user.id,
 	// 		hasLiked: true,
 	// 		hasWatched: true,
 	// 	})
-	// 	.map(interaction => interaction.movie);
+	// const userMovies = await Interaction
+	// 	.aggregate([
+	// 		{
+	// 			$match: {
+	// 				user: user.id,
+	// 				hasLiked: true,
+	// 				hasWatched: true,
+	// 			},
+	// 		},
+	// 		{
+	// 			$group: {
+	// 				_id: '$movie',
+	// 			},
+	// 		},
+	// 		{
+	// 			$sort: {
+	// 				movie: 1,
+	// 			},
+	// 		},
+	// 	]);
+	// console.log(userMovies)
+
 	// // 2. Grab users that've watched similar movies
 	// // output: array of users with similar watched and liked movies
 	// const similarUsers = await Interaction

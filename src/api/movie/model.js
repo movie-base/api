@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
+const mongooseKeywords = require('mongoose-keywords');
 
 const movieSchema = new mongoose.Schema({
 	title: {
 		type: String,
-		index: true,
 	},
 	year: {
 		type: String,
-		index: true,
 	},
 	released: String,
 	runtime: String,
@@ -17,22 +16,17 @@ const movieSchema = new mongoose.Schema({
 	actors: [String],
 	plot: {
 		type: String,
-		index: true,
 	},
 	language: [String],
 	country: {
 		type: String,
-		index: true,
 	},
 	poster: String,
 	rottenTomatoesRating: Number,
 	metascore: Number,
 	imdbRating: Number,
 	imdbVotes: Number,
-	imdbId: {
-		type: String,
-		unique: true,
-	},
+	imdbId: String,
 	boxOffice: Number,
 	archived: { type: Boolean, default: false },
 }, { timestamps: true });
@@ -69,6 +63,14 @@ movieSchema.methods = {
 		} : view;
 	},
 };
+
+movieSchema.index({
+	title: 1,
+	year: 1,
+	released: 1,
+	imdbId: 1,
+}, { unique: true });
+movieSchema.plugin(mongooseKeywords, { paths: ['title', 'year', 'plot', 'country', 'language'] });
 
 const Movie = mongoose.model('Movie', movieSchema);
 
