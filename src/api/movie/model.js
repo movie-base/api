@@ -29,7 +29,10 @@ const movieSchema = new mongoose.Schema({
 	metascore: Number,
 	imdbRating: Number,
 	imdbVotes: Number,
-	imdbId: String,
+	imdbId: {
+		type: String,
+		unique: true,
+	},
 	boxOffice: Number,
 	archived: { type: Boolean, default: false },
 }, { timestamps: true });
