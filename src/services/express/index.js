@@ -28,7 +28,7 @@ module.exports = (routes) => {
 	}
 
 	if (config.env === 'development') {
-		app.use(cors({ credentials: true, origin: false }));
+		app.use(cors());
 	}
 
 	app.use(bodyParser.urlencoded({ extended: false }));
