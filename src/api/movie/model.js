@@ -17,7 +17,7 @@ const movieSchema = new mongoose.Schema({
 	plot: {
 		type: String,
 	},
-	language: [String],
+	languages: [String],
 	country: {
 		type: String,
 	},
@@ -51,7 +51,7 @@ movieSchema.methods = {
 			writers: this.writers,
 			actors: this.actors,
 			plot: this.plot,
-			language: this.language,
+			languages: this.languages,
 			country: this.country,
 			poster: this.poster,
 			rottenTomatoesRating: this.rottenTomatoesRating,
@@ -70,7 +70,7 @@ movieSchema.index({
 	released: 1,
 	imdbId: 1,
 }, { unique: true });
-movieSchema.plugin(mongooseKeywords, { paths: ['title', 'year', 'plot', 'country', 'language'] });
+movieSchema.plugin(mongooseKeywords, { paths: ['title', 'year', 'plot', 'country', 'languages'] });
 
 const Movie = mongoose.model('Movie', movieSchema);
 
