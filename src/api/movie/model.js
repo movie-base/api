@@ -70,7 +70,7 @@ movieSchema.index({
 	released: 1,
 	imdbId: 1,
 }, { unique: true });
-movieSchema.plugin(mongooseKeywords, { paths: ['title', 'year', 'plot', 'country', 'languages'] });
+movieSchema.plugin(mongooseKeywords, { paths: ['title', 'year', 'plot', 'country'] });
 
 const Movie = mongoose.model('Movie', movieSchema);
 
