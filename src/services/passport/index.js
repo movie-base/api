@@ -56,7 +56,7 @@ function passwordAuthentication(email, password, done) {
 		password: User.schema.tree.password,
 	});
 	userSchema.validate({ email, password }, (err) => {
-		if (err) return done(new APIError(400, new ErrorsArray('auth.alreadyExists'), err));
+		if (err) return done(new APIError(400, new ErrorsArray('auth.invalidCredentials'), err));
 		User.findOne({ email })
 			.then((user) => {
 				if (!user) {
