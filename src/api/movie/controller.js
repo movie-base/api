@@ -18,7 +18,7 @@ exports.create = ({ body, user }, res, next) =>
 		.catch(next);
 
 exports.index = ({ querymen: { query, select, cursor } }, res, next) =>
-	Movie.find({ archived: { $ne: true } }, select, cursor)
+	Movie.find({ ...query, archived: { $ne: true } }, select, cursor)
 		.then(movie => movie.map(movieObject => movieObject.view(true)))
 		.then(success(res))
 		.catch(next);
