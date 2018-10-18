@@ -8,12 +8,7 @@ exports.index = async ({ querymen: { query, select, cursor }, user }, res, next)
 	// 1. Grab all watched and liked movies from target user's
 	// interactions
 	// output: array of movieIds watched by the target user
-	// const userMovies = await Interaction
-	// 	.find({
-	// 		user: user.id,
-	// 		hasLiked: true,
-	// 		hasWatched: true,
-	// 	})
+
 	// const userMovies = await Interaction
 	// 	.aggregate([
 	// 		{

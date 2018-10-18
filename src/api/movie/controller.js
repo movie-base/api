@@ -26,7 +26,7 @@ exports.index = ({ querymen: { query, select, cursor } }, res, next) =>
 exports.show = ({ params }, res, next) =>
 	Movie.findById(params.id)
 		.then(notFound(res))
-		.then(movie => (movie ? movie.view() : null))
+		.then(movie => (movie ? movie.view(true) : null))
 		.then(success(res))
 		.catch(next);
 
