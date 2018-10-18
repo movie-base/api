@@ -13,10 +13,15 @@ const Interaction = require('./model');
 
 exports.create = async ({ body, user }, res, next) => {
 	const userId = body.user ? body.user : user.id;
-	const existingInteraction = await Interaction.findOneAndUpdate({ user: userId, movie: body.movie }, body);
+	const existingInteraction = await Interaction
+		.findOneAndUpdate({ user: userId, movie: body.movie }, body)
+		.populate('movie');
 	if (existingInteraction) return res.status(200).json(existingInteraction);
-	await Interaction.create({ user: userId, ...body })
+	const newInteraction = await Interaction.create({ user: userId, ...body })
 		.then(interaction => interaction.view(true))
+		.catch(next);
+	await Interaction.findById(newInteraction.id)
+		.populate('movie')
 		.then(interaction => res.status(201).json(interaction))
 		.catch(next);
 };
