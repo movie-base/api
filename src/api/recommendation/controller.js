@@ -3,7 +3,6 @@ const Interaction = require('../interaction/model');
 
 // Max number of similar users comparisons.
 const MAX_USER_COMPARISONS = 20;
-const MAX_RECOMMENDATIONS = 100;
 
 exports.index = async ({ user, querymen: { select, cursor } }, res, next) => {
 	// 1. Grab all liked movies by target user
