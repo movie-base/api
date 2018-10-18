@@ -12,7 +12,8 @@ const Interaction = require('./model');
 */
 
 exports.create = ({ body, user }, res, next) =>
-	Interaction.create(body)
+	Interaction.create({ user: user.id, ...body })
+		.populate('movie')
 		.then(interaction => interaction.view(true))
 		.then(interaction => res.status(201).json(interaction))
 		.catch(next);

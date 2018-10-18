@@ -1,30 +1,18 @@
 const _ = require('lodash');
-const { ObjectId } = require('mongoose').Schema;
 const { success, notFound } = require('../../services/response/');
 const Interaction = require('../interaction/model');
 const Movie = require('../movie/model');
 
-exports.index = async ({ querymen: { query, select, cursor }, user }, res, next) => {
+exports.index = async ({ user }, res, next) => {
 	// 1. Grab all watched and liked movies from target user's
 	// interactions
 	// output: array of movieIds watched by the target user
-
-	// console.log({
-	// 	user: ObjectId(user.id),
-	// 	hasLiked: true,
-	// 	hasWatched: true,
-	// });
-	// const userMovies = await Interaction.find({
-	// 	user: ObjectId(user.id),
-	// 	hasLiked: true,
-	// 	hasWatched: true,
-	// });
 
 	// const userMovies = await Interaction
 	// 	.aggregate([
 	// 		{
 	// 			$match: {
-	// 				user: ObjectId(user.id),
+	// 				user: user.id,
 	// 				hasLiked: true,
 	// 				hasWatched: true,
 	// 			},
@@ -34,11 +22,11 @@ exports.index = async ({ querymen: { query, select, cursor }, user }, res, next)
 	// 				_id: '$movie',
 	// 			},
 	// 		},
-	// 		{
-	// 			$sort: {
-	// 				movie: 1,
-	// 			},
-	// 		},
+	// 		// {
+	// 		// 	$sort: {
+	// 		// 		movie: 1,
+	// 		// 	},
+	// 		// },
 	// 	]);
 	// return res.json({
 	// 	userMovies,
@@ -73,12 +61,8 @@ exports.index = async ({ querymen: { query, select, cursor }, user }, res, next)
 	// 	hasWatched: true,
 	// }).map(interaction => interaction.movie);
 
-	const movies = await Movie.find().limit(20);
+	// const movies = await Movie.find().limit(20);
 	return res.json({
 		movies,
 	});
-	// const
-	// return res.json({
-	// 	user: user.id,
-	// });
 };
