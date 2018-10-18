@@ -9,27 +9,27 @@ exports.index = async ({ querymen: { query, select, cursor }, user }, res, next)
 	// interactions
 	// output: array of movieIds watched by the target user
 
-	// const userMovies = await Interaction
-	// 	.aggregate([
-	// 		{
-	// 			$match: {
-	// 				user: user.id,
-	// 				hasLiked: true,
-	// 				hasWatched: true,
-	// 			},
-	// 		},
-	// 		{
-	// 			$group: {
-	// 				_id: '$movie',
-	// 			},
-	// 		},
-	// 		{
-	// 			$sort: {
-	// 				movie: 1,
-	// 			},
-	// 		},
-	// 	]);
-	// console.log(userMovies)
+	const userMovies = await Interaction
+		.aggregate([
+			{
+				$match: {
+					user: user.id,
+					hasLiked: true,
+					hasWatched: true,
+				},
+			},
+			{
+				$group: {
+					_id: '$movie',
+				},
+			},
+			{
+				$sort: {
+					movie: 1,
+				},
+			},
+		]);
+	console.log(userMovies)
 
 	// // 2. Grab users that've watched similar movies
 	// // output: array of users with similar watched and liked movies

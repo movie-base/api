@@ -19,6 +19,7 @@ exports.create = ({ body, user }, res, next) =>
 
 exports.index = ({ querymen: { query, select, cursor }, user }, res, next) =>
 	Interaction.find({ ...query, archived: { $ne: true }, user: user.id }, select, cursor)
+		.populate('movie')
 		.then(interaction => interaction.map(interactionObject => interactionObject.view(true)))
 		.then(success(res))
 		.catch(next);
