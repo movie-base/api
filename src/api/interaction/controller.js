@@ -24,6 +24,12 @@ exports.index = ({ querymen: { query, select, cursor }, user }, res, next) =>
 		.then(success(res))
 		.catch(next);
 
+exports.showUserInteractions = ({ params }, res, next) =>
+	Interaction.find({ archived: { $ne: true }, user: params.userId })
+		.then(interaction => interaction.map(interactionObject => interactionObject.view(true)))
+		.then(success(res))
+		.catch(next);
+
 exports.show = ({ params }, res, next) =>
 	Interaction.findById(params.id)
 		.then(notFound(res))

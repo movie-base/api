@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { middleware: query } = require('querymen');
 const { token } = require('../../services/passport');
 const {
-	create, index, show, update, destroy,
+	create, index, show, update, destroy, showUserInteractions
 } = require('./controller');
 
 const router = new Router();
@@ -67,6 +67,24 @@ router.get(
 	token({ required: true }),
 	show,
 );
+
+/**
+ * @api {get} /interactions/user/:userid Retrieve User Interaction
+ * @apiName RetrieveUserInteraction
+ * @apiGroup Interaction
+ * @apiPerInteraction user
+ * @apiParam {String} access_token user access token.
+ * @apiSuccess {Object} Interaction Interaction's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Interaction not found.
+ * @apiError 401 user access only.
+ */
+router.get(
+	'/user/:userId',
+	token({ required: true, roles: ['admin'] }),
+	showUserInteractions,
+);
+
 
 /**
  * @api {put} /interactions/:id Update Interaction
