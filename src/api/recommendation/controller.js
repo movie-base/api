@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Interaction = require('../interaction/model');
 
 // Max number of similar users comparisons.
-const MAX_USER_COMPARISONS = 30;
+const MAX_USER_COMPARISONS = 20;
 const MAX_RECOMMENDATIONS = 100;
 
 exports.index = async ({ user, querymen: { select, cursor } }, res, next) => {
