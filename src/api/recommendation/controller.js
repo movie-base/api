@@ -1,48 +1,32 @@
 const _ = require('lodash');
-const { success, notFound } = require('../../services/response/');
 const Interaction = require('../interaction/model');
 const Movie = require('../movie/model');
 
 exports.index = async ({ user }, res, next) => {
-	// 1. Grab all watched and liked movies from target user's
-	// interactions
-	// output: array of movieIds watched by the target user
-
-	// const userMovies = await Interaction
-	// 	.aggregate([
-	// 		{
-	// 			$match: {
-	// 				user: user.id,
-	// 				hasLiked: true,
-	// 				hasWatched: true,
-	// 			},
-	// 		},
-	// 		{
-	// 			$group: {
-	// 				_id: '$movie',
-	// 			},
-	// 		},
-	// 		// {
-	// 		// 	$sort: {
-	// 		// 		movie: 1,
-	// 		// 	},
-	// 		// },
-	// 	]);
-	// return res.json({
-	// 	userMovies,
-	// });
-
-	// // 2. Grab users that've watched similar movies
-	// // output: array of users with similar watched and liked movies
-	// const similarUsers = await Interaction
+	// // 1. Grab all watched and liked movies from target user's
+	// // interactions
+	// // output: array of movieIds watched by the target user
+	// const userLikedInteractions = await Interaction
 	// 	.find({
-	// 		movie: {
-	// 			$in: userMovies.map(id => ObjectId(id)),
-	// 		},
+	// 		user: user.id,
 	// 		hasLiked: true,
 	// 		hasWatched: true,
-	// 	})
-	// 	.map(interacton => interacton.user);
+	// 	});
+	// const userLikedMovies = _.uniq(userLikedInteractions, 'movie')
+	// 	.map(interaction => interaction.movie);
+	// // 2. Grab users that've watched similar movies
+	// // output: array of users with similar watched and liked movies
+	// const similarUserInteractions = await Interaction
+	// 	.find({
+	// 		movie: { $in: userLikedMovies },
+	// 		hasLiked: true,
+	// 		hasWatched: true,
+	// 	});
+	// return res.json({
+	// 	similarUserInteractions,
+	// });
+
+
 	// // 3. Sort similar users by frequency
 	// // output: sorted array of userids
 	// const similarUsersfreq = similarUsers.reduce((obj, val) => {
@@ -61,7 +45,7 @@ exports.index = async ({ user }, res, next) => {
 	// 	hasWatched: true,
 	// }).map(interaction => interaction.movie);
 
-	// const movies = await Movie.find().limit(20);
+	const movies = await Movie.find().limit(20);
 	return res.json({
 		movies,
 	});

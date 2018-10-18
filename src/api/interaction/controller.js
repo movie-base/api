@@ -11,11 +11,15 @@ const Interaction = require('./model');
 * GENERIC FUNCTIONS (do not modify)
 */
 
-exports.create = ({ body, user }, res, next) =>
-	Interaction.create({ user: user.id, ...body })
+exports.create = async ({ body, user }, res, next) => {
+	const userId = body.user ? body.user : user.id;
+	const existingInteraction = await Interaction.findOneAndUpdate({ user: userId, movie: body.movie }, body);
+	if (existingInteraction) return res.status(200).json(existingInteraction);
+	await Interaction.create({ user: userId, ...body })
 		.then(interaction => interaction.view(true))
 		.then(interaction => res.status(201).json(interaction))
 		.catch(next);
+};
 
 exports.index = ({ querymen: { query, select, cursor }, user }, res, next) =>
 	Interaction.find({ ...query, archived: { $ne: true }, user: user.id }, select, cursor)
