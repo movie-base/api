@@ -16,7 +16,7 @@ exports.create = async ({ body, user }, res, next) => {
 	const existingInteraction = await Interaction
 		.findOneAndUpdate({ user: userId, movie: body.movie }, body)
 		.populate('movie');
-	if (existingInteraction) return res.status(200).json(existingInteraction);
+	if (existingInteraction) return res.status(200).json({ ...existingInteraction, ...body });
 	const newInteraction = await Interaction.create({ user: userId, ...body })
 		.then(interaction => interaction.view(true))
 		.catch(next);
