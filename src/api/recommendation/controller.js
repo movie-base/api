@@ -27,9 +27,15 @@ exports.index = async ({ user, querymen: { select, cursor } }, res) => {
 		});
 	const userDislikedMovies = _.uniq(userDisikedInteractions, 'movie')
 		.map(interaction => interaction.movie);
-	const userLikedAndDislikedMovies = _.unionWith(
-		userLikedMovies,
-		userDislikedMovies,
+	const userWantsToWatchInteractions = await Interaction
+		.find({
+			user: user.id,
+			wantsToWatch: true,
+		});
+	const userWantsToWatchMovies = _.uniq(userWantsToWatchInteractions, 'movie')
+		.map(interaction => interaction.movie);
+	const userMovies = _.uniq(
+		_.flatten([userLikedMovies, userDislikedMovies, userWantsToWatchMovies]),
 		_.isEqual,
 	);
 	// 2. Grab users that've watched similar movies
@@ -57,7 +63,7 @@ exports.index = async ({ user, querymen: { select, cursor } }, res) => {
 	// 4. Grab all movies liked by similar users, but not watched by the target user
 	const intersectionInteractions = await Interaction.find({
 		user: { $in: similarUsers },
-		movie: { $nin: userLikedAndDislikedMovies },
+		movie: { $nin: userMovies },
 		hasLiked: true,
 		hasWatched: true,
 	}, select, cursor)
@@ -67,7 +73,7 @@ exports.index = async ({ user, querymen: { select, cursor } }, res) => {
 	const movies = _.chain(intersectionInteractions.map(i => i.movie))
 		.uniq('id')
 		.orderBy('year', 'desc')
-		.pull(userLikedAndDislikedMovies)
+		.pull(userMovies)
 		.compact()
 		.value();
 	return res.json({ movies });
