@@ -68,6 +68,7 @@ exports.index = async ({ user, querymen: { select, cursor } }, res) => {
 		.uniq('id')
 		.orderBy('year', 'desc')
 		.pull(userLikedAndDislikedMovies)
+		.compact()
 		.value();
 	return res.json({ movies });
 };
