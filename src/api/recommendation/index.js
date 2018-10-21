@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { middleware: query } = require('querymen');
 const { token } = require('../../services/passport');
-const { index } = require('./controller');
+const { index, indexV2 } = require('./controller');
 
 const router = new Router();
 
